@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
+import DataList from "./DataList";
 
 const DataForm = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ const DataForm = () => {
     time: "",
     notes: "",
   });
+  const [data, setData] = useState([]);
   // const [payment, setPayment] = useState("");
   // const [amount, setAmount] = useState("");
   const [time, setTime] = useState("");
@@ -54,11 +56,16 @@ const DataForm = () => {
   };
 
   const getData = async () => {
-    const querySnapshot = await getDocs(collection(db, "users"));
-    querySnapshot.forEach((doc) => {
-      console.log("doc...", doc.data());
-      console.log(`${doc.id} => ${doc.data()}`);
+    const querySnapshot = await getDocs(collection(db, "caja"));
+    const array = [];
+    querySnapshot.forEach((data) => {
+      // console.log("doc...", data.data());
+      console.log(`${data.id} => ${data.data()}`);
+      array.push(data.data());
     });
+    console.log("array...", array);
+    setData(array);
+    console.log("dbData...", data);
   };
 
   useEffect(() => {
@@ -73,17 +80,17 @@ const DataForm = () => {
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="payment">
-            Tipo de pago: {formData.payment}
+            Tipo de pago:
           </label>
           <select id="payment" name="payment" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200" value={formData.payment} onChange={handleChange}>
-            <option>Seleccione el tipo</option>
+            <option>Seleccione el tipo de pago</option>
             <option value="tarjeta">Tarjeta</option>
             <option value="efectivo">Efectivo</option>
           </select>
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="amount">
-            Monto: {formData.amount}
+            Monto:
           </label>
           <input type="text" id="amount" name="amount" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200" placeholder="Monto" value={formData.amount} onChange={handleChange} />
         </div>
@@ -105,6 +112,7 @@ const DataForm = () => {
           </button>
         </div>
       </form>
+      <DataList data={data} />
     </div>
   );
 };
