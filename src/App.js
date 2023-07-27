@@ -26,9 +26,9 @@ function App() {
 
   return (
     <div className="container mx-auto" style={{ height: viewportHeight }}>
-      <h1 className="absolute">
+      {/* <h1 className="absolute left-0 right-0 text-center bg-yellow-200">
         {viewportWidth}px * {viewportHeight}px - {screenHeight}px
-      </h1>
+      </h1> */}
       <h1 className="text-3xl font-bold text-center p-6">Control de Caja</h1>
       {/* <img src="https://www.readypizzacr.com/image/92689584-09.jpg" alt="Ready Pizza" className="mx-auto" width="200" /> */}
       <DataForm />

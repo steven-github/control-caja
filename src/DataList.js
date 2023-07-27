@@ -55,7 +55,7 @@ const DataList = ({ data, tarjeta, efectivo }) => {
   };
   return (
     <>
-      <div className="relative overflow-x-auto" style={{ height: viewportHeight - (84 + 89 + 114) }}>
+      <div className="relative overflow-x-auto border-t" style={{ height: viewportHeight - (84 + 89 + 114) }}>
         <table className="w-full text-sm text-left text-gray-600">
           <thead className="text-sm text-black uppercase bg-gray-100">
             <tr>
