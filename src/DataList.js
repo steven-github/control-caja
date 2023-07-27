@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "flowbite";
 
-const DataList = ({ data }) => {
+const DataList = ({ data, tarjeta, efectivo }) => {
   const $targetEl = document.getElementById("detailsModal");
   const options = {
     // placement: "bottom-right",
@@ -21,7 +21,11 @@ const DataList = ({ data }) => {
   const modal = new Modal($targetEl, options);
   const [details, setDetails] = useState([]);
 
-  useEffect(() => {});
+  useEffect(() => {
+    console.log("data", data);
+    console.log("tarjeta", tarjeta);
+    console.log("efectivo", efectivo);
+  });
 
   const showModal = (data) => {
     console.log("data", data);
@@ -76,7 +80,6 @@ const DataList = ({ data }) => {
             ))}
           </tbody>
         </table>
-
         <div id="detailsModal" tabIndex="-1" aria-hidden="true" className="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
           <div className="relative w-full max-w-2xl max-h-full">
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -101,6 +104,24 @@ const DataList = ({ data }) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="absolute left-0 right-0 bottom-0">
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 absolute bottom-0">
+          <tbody>
+            <tr class="bg-white border-t dark:bg-gray-900 dark:border-gray-700">
+              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <span className="capitalize">Tarjeta</span>
+              </th>
+              <td className="px-6 py-4">₡{tarjeta}</td>
+            </tr>
+            <tr class="border-t bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <span className="capitalize">Efectivo</span>
+              </th>
+              <td className="px-6 py-4">₡{efectivo}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );

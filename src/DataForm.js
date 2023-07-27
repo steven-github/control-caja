@@ -37,6 +37,8 @@ const DataForm = () => {
   const [invalidAmount, setInvalidAmount] = useState(false);
   const [invalidCurrency, setInvalidCurrency] = useState(false);
   const modal = new Modal($targetEl, options);
+  const [totalTarjeta, setTotalTarjeta] = useState(0);
+  const [totalEfectivo, setTotalEfectivo] = useState(0);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,6 +89,13 @@ const DataForm = () => {
       array.push(data.data());
     });
     setData(array);
+    array.forEach((data) => {
+      if (data.payment === "tarjeta") {
+        setTotalTarjeta(totalTarjeta + parseInt(data.amount));
+      } else {
+        setTotalEfectivo(totalEfectivo + parseInt(data.amount));
+      }
+    });
   };
 
   useEffect(() => {
@@ -195,7 +204,7 @@ const DataForm = () => {
           </div>
         </div>
       </div>
-      {data.length > 0 ? <DataList data={data} /> : <p className="p-4 text-center">No hay datos</p>}
+      {data.length > 0 ? <DataList data={data} tarjeta={totalTarjeta} efectivo={totalEfectivo} /> : <p className="p-4 text-center">No hay datos</p>}
     </div>
   );
 };
