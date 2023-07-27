@@ -40,10 +40,10 @@ const DataList = ({ data, tarjeta, efectivo }) => {
     btn.click();
   };
   return (
-    <div className="p-4">
-      <div className="relative overflow-x-auto max-h-96">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <>
+      <div className="relative overflow-x-auto max-h-97">
+        <table className="w-full text-sm text-left text-gray-600">
+          <thead className="text-sm text-black uppercase bg-gray-100">
             <tr>
               <th scope="col" className="px-6 py-3">
                 Pago
@@ -52,27 +52,25 @@ const DataList = ({ data, tarjeta, efectivo }) => {
                 Monto
               </th>
               {/* <th scope="col" className="px-6 py-3">
-                Hora
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Notas
-              </th> */}
-              <th scope="col" className="px-6 py-3">
-                Accion
-              </th>
+        Hora
+       </th>
+       <th scope="col" className="px-6 py-3">
+        Notas
+       </th> */}
+              <th scope="col" className="px-6 py-3"></th>
             </tr>
           </thead>
           <tbody>
             {data.map((data, index) => (
-              <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <tr key={index} className={` border-b  ${data.payment === "tarjeta" ? "bg-white" : "bg-green-100 border-b-white"}`}>
+                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
                   <span className="capitalize">{data.payment}</span>
                 </th>
                 <td className="px-6 py-4">₡{Intl.NumberFormat("en-US").format(data.amount)}</td>
                 {/* <td className="px-6 py-4">{data.time}</td>
-                <td className="px-6 py-4">{data.notes ? data.notes : "N/A"}</td> */}
-                <td className="px-6 py-4">
-                  <button data-modal-target="detailsModal" className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={() => showModal(data)}>
+        <td className="px-6 py-4">{data.notes ? data.notes : "N/A"}</td> */}
+                <td className="px-6 py-4 text-right">
+                  <button data-modal-target="detailsModal" className=" hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 bg-white" onClick={() => showModal(data)}>
                     Detalles
                   </button>
                 </td>
@@ -82,10 +80,10 @@ const DataList = ({ data, tarjeta, efectivo }) => {
         </table>
         <div id="detailsModal" tabIndex="-1" aria-hidden="true" className="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
           <div className="relative w-full max-w-2xl max-h-full">
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-              <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Detalles de la orden</h3>
-                <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center" data-modal-hide="detailsModal" onClick={hideModal}>
+            <div className="relative bg-white rounded-lg shadow">
+              <div className="flex items-start justify-between p-4 border-b rounded-t">
+                <h3 className="text-xl font-semibold">Detalles de la orden</h3>
+                <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover: rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center" data-modal-hide="detailsModal" onClick={hideModal}>
                   <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                   </svg>
@@ -106,16 +104,16 @@ const DataList = ({ data, tarjeta, efectivo }) => {
         </div>
       </div>
       <div className="absolute left-0 right-0 bottom-0">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 absolute bottom-0">
+        <table className="w-full text-sm text-left text-gray-500 absolute bottom-0">
           <tbody>
-            <tr class="bg-white border-t dark:bg-gray-900 dark:border-gray-700">
-              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <tr class="bg-white border-t dark:bg-gray-900">
+              <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
                 <span className="capitalize">Tarjeta</span>
               </th>
               <td className="px-6 py-4">₡{tarjeta}</td>
             </tr>
-            <tr class="border-t bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            <tr class="border-t bg-gray-50 dark:bg-gray-800">
+              <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
                 <span className="capitalize">Efectivo</span>
               </th>
               <td className="px-6 py-4">₡{efectivo}</td>
@@ -123,7 +121,7 @@ const DataList = ({ data, tarjeta, efectivo }) => {
           </tbody>
         </table>
       </div>
-    </div>
+    </>
   );
 };
 

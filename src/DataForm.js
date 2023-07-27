@@ -117,10 +117,10 @@ const DataForm = () => {
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-center">
-        <button id="open-form-modal" data-modal-target="formModal" className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button" onClick={showModal}>
-          Agregar Orden
+    <>
+      <div className="flex items-center justify-center m-6">
+        <button id="open-form-modal" data-modal-target="formModal" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" type="button" onClick={showModal}>
+          Agregar Registro
         </button>
       </div>
       <div id="formModal" tabIndex="-1" aria-hidden="true" className="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -205,7 +205,7 @@ const DataForm = () => {
         </div>
       </div>
       {data.length > 0 ? <DataList data={data} tarjeta={totalTarjeta} efectivo={totalEfectivo} /> : <p className="p-4 text-center">No hay datos</p>}
-    </div>
+    </>
   );
 };
 

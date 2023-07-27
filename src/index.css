@@ -6,3 +6,7 @@
 body {
   font-family: "Montserrat", sans-serif;
 }
+
+.max-h-97 {
+  height: calc(100vh - 255px);
+}
