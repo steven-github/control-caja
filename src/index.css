@@ -7,16 +7,6 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-body,
-html {
-  height: 100vh;
-  min-height: -webkit-fill-available;
-}
-
-.container {
-  height: 100dvh;
-}
-
-.max-h-97 {
-  height: calc(100vh - 286px);
+.max-h {
+  height: calc(100vh - 287px);
 }

@@ -20,12 +20,26 @@ const DataList = ({ data, tarjeta, efectivo }) => {
   };
   const modal = new Modal($targetEl, options);
   const [details, setDetails] = useState([]);
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+  const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+  const [screenHeight, setScreenHeight] = useState(window.screen.height);
+
+  // Event handler for updating the viewport width on resize
+  const handleResize = () => {
+    setViewportWidth(window.innerWidth);
+    setViewportHeight(window.innerHeight);
+    setScreenHeight(window.screen.height);
+  };
 
   useEffect(() => {
-    console.log("data", data);
-    console.log("tarjeta", tarjeta);
-    console.log("efectivo", efectivo);
-  });
+    // Add event listener when the component mounts
+    window.addEventListener("resize", handleResize);
+
+    // Remove event listener when the component unmounts to avoid memory leaks
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const showModal = (data) => {
     console.log("data", data);
@@ -41,7 +55,7 @@ const DataList = ({ data, tarjeta, efectivo }) => {
   };
   return (
     <>
-      <div className="relative overflow-x-auto max-h-97">
+      <div className="relative overflow-x-auto" style={{ height: viewportHeight - (84 + 89 + 114) }}>
         <table className="w-full text-sm text-left text-gray-600">
           <thead className="text-sm text-black uppercase bg-gray-100">
             <tr>

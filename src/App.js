@@ -25,10 +25,10 @@ function App() {
   }, []);
 
   return (
-    <div className="container mx-auto">
-      <h1>Current Viewport Width: {viewportWidth}px</h1>
-      <h1>Current Viewport Height: {viewportHeight}px</h1>
-      <h1>Current Window Height: {screenHeight}px</h1>
+    <div className="container mx-auto" style={{ height: viewportHeight }}>
+      <h1 className="absolute">
+        {viewportWidth}px * {viewportHeight}px - {screenHeight}px
+      </h1>
       <h1 className="text-3xl font-bold text-center p-6">Control de Caja</h1>
       {/* <img src="https://www.readypizzacr.com/image/92689584-09.jpg" alt="Ready Pizza" className="mx-auto" width="200" /> */}
       <DataForm />
