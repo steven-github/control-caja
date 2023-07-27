@@ -42,10 +42,8 @@ const DataForm = () => {
 
   const getData = async () => {
     const querySnapshot = await getDocs(collection(db, "caja"));
-    // console.log("querySnapshot...", querySnapshot);
     const array = [];
     querySnapshot.forEach((data) => {
-      // console.log("doc...", data.data());
       // console.log(`${data.id} => ${data.data()}`);
       array.push({ id: data.id, ...data.data() });
     });
@@ -210,7 +208,7 @@ const DataForm = () => {
           </div>
         </div>
       </div>
-      {data.length > 0 ? <DataList data={data} tarjeta={totalTarjeta} efectivo={totalEfectivo} /> : <p className="p-4 text-center">No hay datos</p>}
+      {data.length > 0 ? <DataList data={data} tarjeta={totalTarjeta} efectivo={totalEfectivo} getData={getData} /> : <p className="p-4 text-center">No hay datos</p>}
     </>
   );
 };
