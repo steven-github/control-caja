@@ -104,15 +104,15 @@ const DataList = ({ data, tarjeta, efectivo }) => {
         </div>
       </div>
 
-      <table className="w-full text-sm text-left text-gray-500 absolute left-0 right-0 bottom-0">
+      <table className="w-full text-md text-left bg-slate-900 text-white absolute left-0 right-0 bottom-0">
         <tbody>
-          <tr className="bg-white border-t dark:bg-gray-900">
+          <tr className="bg-slate-900 text-white border-t">
             <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
               <span className="capitalize">Tarjeta</span>
             </th>
             <td className="px-6 py-4">₡{tarjeta}</td>
           </tr>
-          <tr className="border-t bg-gray-50 dark:bg-gray-800">
+          <tr className="border-t">
             <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
               <span className="capitalize">Efectivo</span>
             </th>
