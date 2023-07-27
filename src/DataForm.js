@@ -33,7 +33,6 @@ const DataForm = () => {
     notes: "",
   });
   const [data, setData] = useState([]);
-  const [disabled, setDisabled] = useState(true);
   const [invalidPayment, setInvalidPayment] = useState(false);
   const [invalidAmount, setInvalidAmount] = useState(false);
   const [invalidCurrency, setInvalidCurrency] = useState(false);
@@ -186,7 +185,6 @@ const DataForm = () => {
                   </label>
                   <input type="hidden" id="time" name="time" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200" placeholder="Hora" value={time} />
                 </div> */}
-                isDisabled: {disabled}
                 <div className="flex justify-center">
                   <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                     Salvar
