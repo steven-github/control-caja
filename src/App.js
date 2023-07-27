@@ -3,15 +3,15 @@ import "./App.css";
 import DataForm from "./DataForm";
 
 function App() {
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+  // const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
-  const [screenHeight, setScreenHeight] = useState(window.screen.height);
+  // const [screenHeight, setScreenHeight] = useState(window.screen.height);
 
   // Event handler for updating the viewport width on resize
   const handleResize = () => {
-    setViewportWidth(window.innerWidth);
+    // setViewportWidth(window.innerWidth);
     setViewportHeight(window.innerHeight);
-    setScreenHeight(window.screen.height);
+    // setScreenHeight(window.screen.height);
   };
 
   useEffect(() => {

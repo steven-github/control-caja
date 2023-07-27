@@ -20,15 +20,11 @@ const DataList = ({ data, tarjeta, efectivo }) => {
   };
   const modal = new Modal($targetEl, options);
   const [details, setDetails] = useState([]);
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
-  const [screenHeight, setScreenHeight] = useState(window.screen.height);
 
   // Event handler for updating the viewport width on resize
   const handleResize = () => {
-    setViewportWidth(window.innerWidth);
     setViewportHeight(window.innerHeight);
-    setScreenHeight(window.screen.height);
   };
 
   useEffect(() => {
@@ -124,13 +120,13 @@ const DataList = ({ data, tarjeta, efectivo }) => {
             <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
               <span className="capitalize">Tarjeta</span>
             </th>
-            <td className="px-6 py-4">₡{tarjeta}</td>
+            <td className="px-6 py-4">₡{Intl.NumberFormat("en-US").format(tarjeta)}</td>
           </tr>
           <tr className="border-t">
             <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
               <span className="capitalize">Efectivo</span>
             </th>
-            <td className="px-6 py-4">₡{efectivo}</td>
+            <td className="px-6 py-4">₡{Intl.NumberFormat("en-US").format(efectivo)}</td>
           </tr>
         </tbody>
       </table>

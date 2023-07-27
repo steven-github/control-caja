@@ -8,7 +8,6 @@ import { Modal } from "flowbite";
 const DataForm = () => {
   // set the modal menu element
   const $targetEl = document.getElementById("formModal");
-
   // options with default values
   const options = {
     // placement: "bottom-right",
@@ -26,19 +25,55 @@ const DataForm = () => {
     },
   };
   const [formData, setFormData] = useState({
+    id: "",
     payment: "",
     amount: "",
     currency: "",
     time: "",
     notes: "",
   });
+  const modal = new Modal($targetEl, options);
   const [data, setData] = useState([]);
   const [invalidPayment, setInvalidPayment] = useState(false);
   const [invalidAmount, setInvalidAmount] = useState(false);
   const [invalidCurrency, setInvalidCurrency] = useState(false);
-  const modal = new Modal($targetEl, options);
   const [totalTarjeta, setTotalTarjeta] = useState(0);
   const [totalEfectivo, setTotalEfectivo] = useState(0);
+
+  const getData = async () => {
+    const querySnapshot = await getDocs(collection(db, "caja"));
+    // console.log("querySnapshot...", querySnapshot);
+    const array = [];
+    querySnapshot.forEach((data) => {
+      // console.log("doc...", data.data());
+      // console.log(`${data.id} => ${data.data()}`);
+      array.push({ id: data.id, ...data.data() });
+    });
+    setData(array);
+    console.log("array...", array);
+    setTotalTarjeta(0);
+    setTotalEfectivo(0);
+    let totalT = 0;
+    let totalE = 0;
+    array.forEach((data) => {
+      if (data.payment === "tarjeta") {
+        totalT = totalT + parseInt(data.amount);
+      } else {
+        totalE = totalE + parseInt(data.amount);
+      }
+    });
+    setTotalTarjeta(totalT);
+    setTotalEfectivo(totalE);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+    validateForm();
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,56 +99,6 @@ const DataForm = () => {
     }
   };
 
-  const validateForm = () => {
-    !formData.payment ? setInvalidPayment(true) : setInvalidPayment(false);
-    !formData.amount ? setInvalidAmount(true) : setInvalidAmount(false);
-    !formData.currency ? setInvalidCurrency(true) : setInvalidCurrency(false);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-    validateForm();
-  };
-
-  const getData = async () => {
-    const querySnapshot = await getDocs(collection(db, "caja"));
-    const array = [];
-    querySnapshot.forEach((data) => {
-      // console.log("doc...", data.data());
-      console.log(`${data.id} => ${data.data()}`);
-      array.push(data.data());
-    });
-    setData(array);
-    console.log("array...", array);
-    setTotalTarjeta(0);
-    setTotalEfectivo(0);
-    let totalT = 0;
-    let totalE = 0;
-    array.forEach((data) => {
-      if (data.payment === "tarjeta") {
-        totalT = totalT + parseInt(data.amount);
-      } else {
-        totalE = totalE + parseInt(data.amount);
-      }
-    });
-    console.log("totalT...", totalT);
-    console.log("totalE...", totalE);
-    setTotalTarjeta(totalT);
-    setTotalEfectivo(totalE);
-  };
-
-  useEffect(() => {
-    console.log("useEffect...");
-    getData();
-    // setInterval(() => {
-    //   setTime(new Date().toLocaleTimeString());
-    // }, 1000);
-  }, []);
-
   const hideModal = () => {
     modal.hide();
     let btn = document.getElementById("formModal");
@@ -123,6 +108,19 @@ const DataForm = () => {
   const showModal = () => {
     modal.show();
   };
+
+  const validateForm = () => {
+    !formData.payment ? setInvalidPayment(true) : setInvalidPayment(false);
+    !formData.amount ? setInvalidAmount(true) : setInvalidAmount(false);
+    !formData.currency ? setInvalidCurrency(true) : setInvalidCurrency(false);
+  };
+
+  useEffect(() => {
+    getData();
+    // setInterval(() => {
+    //   setTime(new Date().toLocaleTimeString());
+    // }, 1000);
+  }, []);
 
   return (
     <>
