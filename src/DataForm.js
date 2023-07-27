@@ -197,8 +197,7 @@ const DataForm = () => {
           </div>
         </div>
       </div>
-
-      <DataList data={data} />
+      {data.length > 0 ? <DataList data={data} /> : <p className="p-4 text-center">No hay datos</p>}
     </div>
   );
 };
