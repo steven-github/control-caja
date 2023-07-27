@@ -65,7 +65,6 @@ const DataForm = () => {
   };
 
   const validateForm = () => {
-    console.log("validateForm...", formData.amount);
     !formData.payment ? setInvalidPayment(true) : setInvalidPayment(false);
     !formData.amount ? setInvalidAmount(true) : setInvalidAmount(false);
     !formData.currency ? setInvalidCurrency(true) : setInvalidCurrency(false);
@@ -89,13 +88,22 @@ const DataForm = () => {
       array.push(data.data());
     });
     setData(array);
+    console.log("array...", array);
+    setTotalTarjeta(0);
+    setTotalEfectivo(0);
+    let totalT = 0;
+    let totalE = 0;
     array.forEach((data) => {
       if (data.payment === "tarjeta") {
-        setTotalTarjeta(totalTarjeta + parseInt(data.amount));
+        totalT = totalT + parseInt(data.amount);
       } else {
-        setTotalEfectivo(totalEfectivo + parseInt(data.amount));
+        totalE = totalE + parseInt(data.amount);
       }
     });
+    console.log("totalT...", totalT);
+    console.log("totalE...", totalE);
+    setTotalTarjeta(totalT);
+    setTotalEfectivo(totalE);
   };
 
   useEffect(() => {
@@ -118,8 +126,8 @@ const DataForm = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center m-6">
-        <button id="open-form-modal" data-modal-target="formModal" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" type="button" onClick={showModal}>
+      <div className="flex items-center justify-center p-6">
+        <button id="open-form-modal" data-modal-target="formModal" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" type="button" onClick={showModal}>
           Agregar Registro
         </button>
       </div>

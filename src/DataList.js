@@ -103,24 +103,23 @@ const DataList = ({ data, tarjeta, efectivo }) => {
           </div>
         </div>
       </div>
-      <div className="absolute left-0 right-0 bottom-0">
-        <table className="w-full text-sm text-left text-gray-500 absolute bottom-0">
-          <tbody>
-            <tr class="bg-white border-t dark:bg-gray-900">
-              <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
-                <span className="capitalize">Tarjeta</span>
-              </th>
-              <td className="px-6 py-4">₡{tarjeta}</td>
-            </tr>
-            <tr class="border-t bg-gray-50 dark:bg-gray-800">
-              <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
-                <span className="capitalize">Efectivo</span>
-              </th>
-              <td className="px-6 py-4">₡{efectivo}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+
+      <table className="w-full text-sm text-left text-gray-500 absolute left-0 right-0 bottom-0">
+        <tbody>
+          <tr className="bg-white border-t dark:bg-gray-900">
+            <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
+              <span className="capitalize">Tarjeta</span>
+            </th>
+            <td className="px-6 py-4">₡{tarjeta}</td>
+          </tr>
+          <tr className="border-t bg-gray-50 dark:bg-gray-800">
+            <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
+              <span className="capitalize">Efectivo</span>
+            </th>
+            <td className="px-6 py-4">₡{efectivo}</td>
+          </tr>
+        </tbody>
+      </table>
     </>
   );
 };
