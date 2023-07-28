@@ -96,6 +96,7 @@ const DataForm = () => {
       }
     } else {
       console.log("Please fill out all fields.");
+      setSaving(false);
       validateForm();
     }
   };
