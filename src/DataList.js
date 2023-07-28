@@ -137,13 +137,13 @@ const DataList = ({ data, tarjeta, efectivo, getData }) => {
                 </th>
                 <td className="px-6 py-4">₡{Intl.NumberFormat("en-US").format(data.amount)}</td>
                 <td className="px-6 py-4 text-right">
-                  <button data-modal-target="detailsModal" className=" hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center mr-2 bg-white" onClick={() => showDetailsModal(data)}>
+                  <button data-modal-target="detailsModal" className=" hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center mr-2 mb-2 w-20 bg-white" onClick={() => showDetailsModal(data)}>
                     Detalles
                   </button>
-                  <button data-modal-target="detailsModal" className=" hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center mr-2 bg-white" onClick={() => showEditsModal(data)}>
+                  <button data-modal-target="detailsModal" className=" text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-20 bg-white" onClick={() => showEditsModal(data)}>
                     Editar
                   </button>
-                  <button data-modal-target="detailsModal" className=" text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center mr-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900" onClick={() => deleteData(index, data.id)}>
+                  <button data-modal-target="detailsModal" className=" text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center mr-2 w-20 bg-white" onClick={() => deleteData(index, data.id)}>
                     Borrar
                   </button>
                 </td>
@@ -262,13 +262,13 @@ const DataList = ({ data, tarjeta, efectivo, getData }) => {
         <tbody>
           <tr className="bg-slate-900 text-white border-t">
             <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
-              <span className="capitalize">Tarjeta</span>
+              <span className="capitalize">Total en Tarjeta:</span>
             </th>
             <td className="px-6 py-4">₡{Intl.NumberFormat("en-US").format(tarjeta)}</td>
           </tr>
           <tr className="border-t">
             <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
-              <span className="capitalize">Efectivo</span>
+              <span className="capitalize">Total en Efectivo:</span>
             </th>
             <td className="px-6 py-4">₡{Intl.NumberFormat("en-US").format(efectivo)}</td>
           </tr>
