@@ -169,7 +169,7 @@ const DataList = ({ data, tarjeta, efectivo, getData }) => {
                   Tipo de pago: <span className="capitalize">{details.payment}</span>
                 </p>
                 <p className="text-base leading-relaxed text-gray-500">Monto: ₡{Intl.NumberFormat("en-US").format(details.amount)}</p>
-                <p className="text-base leading-relaxed text-gray-500">Notas: {details.notes ? details.note : "Ninguna"}</p>
+                <p className="text-base leading-relaxed text-gray-500">Notas: {details.notes ? details.notes : "Ninguna"}</p>
                 <p className="text-base leading-relaxed text-gray-500">Hora de la compra: {details.time}</p>
               </div>
             </div>
