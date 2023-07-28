@@ -24,24 +24,22 @@ const DataList = ({ data, tarjeta, efectivo, getData }) => {
   const [invalidPayment, setInvalidPayment] = useState(false);
   const [invalidAmount, setInvalidAmount] = useState(false);
   const [invalidCurrency, setInvalidCurrency] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   // Event handler for updating the viewport width on resize
   const handleResize = () => {
     setViewportHeight(window.innerHeight);
   };
 
-  // const updateData = async (docId, info) => {
-  //   console.log("docId", docId);
-  //   const docRef = doc(db, "caja", docId);
-
-  //   // Set the "capital" field of the city 'DC'
-  //   await updateDoc(docRef, info);
-  // };
-
   const deleteData = async (index, docId) => {
+    // let btn = document.getElementById("delete-" + index);
+    // btn.innerText = "Borrando...";
     console.log("docId", docId);
+    setDeleting(true);
     await deleteDoc(doc(db, "caja", docId));
     getData();
+    // btn.innerText = "Borrar";
+    setDeleting(false);
   };
   const showEditsModal = (data) => {
     setDetails(data);
@@ -137,13 +135,13 @@ const DataList = ({ data, tarjeta, efectivo, getData }) => {
                 </th>
                 <td className="px-6 py-4">₡{Intl.NumberFormat("en-US").format(data.amount)}</td>
                 <td className="px-6 py-4 text-right">
-                  <button data-modal-target="detailsModal" className=" hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center mr-2 mb-2 w-20 bg-white" onClick={() => showDetailsModal(data)}>
+                  <button data-modal-target="detailsModal" className=" hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center mr-2 mb-2 w-24 bg-white" onClick={() => showDetailsModal(data)}>
                     Detalles
                   </button>
-                  <button data-modal-target="detailsModal" className=" text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-20 bg-white" onClick={() => showEditsModal(data)}>
+                  <button data-modal-target="detailsModal" className=" text-yellow-400 hover:text-white border border-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-24 bg-white" onClick={() => showEditsModal(data)}>
                     Editar
                   </button>
-                  <button data-modal-target="detailsModal" className=" text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center mr-2 w-20 bg-white" onClick={() => deleteData(index, data.id)}>
+                  <button id={"delete-" + index} data-modal-target="detailsModal" className=" text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center mr-2 w-24 bg-white" onClick={() => deleteData(index, data.id)} disabled={deleting}>
                     Borrar
                   </button>
                 </td>
