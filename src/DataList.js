@@ -117,26 +117,32 @@ const DataList = ({ data, tarjeta, efectivo, getData, deleteAll }) => {
   return (
     <>
       <div className="relative overflow-x-auto border-t" style={{ height: viewportHeight - (89 + 114) }}>
-        <table className="w-full text-sm text-left text-gray-600">
+        <table className="w-full text-sm text-left text-gray-600 text-sm">
           <thead className="text-sm text-black uppercase bg-gray-100">
             <tr>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-3 py-3">
                 Pago
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-3 py-3">
                 Monto
               </th>
-              <th scope="col" className="px-6 py-3"></th>
+              <th scope="col" className="px-3 py-3">
+                Hora
+              </th>
+              <th scope="col" className="px-3 py-3"></th>
             </tr>
           </thead>
           <tbody>
             {data.map((data, index) => (
               <tr key={index} className={` border-b  ${data.payment === "tarjeta" ? "bg-white" : "bg-green-100 border-b-white"}`}>
-                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
+                <th scope="row" className="px-3 py-2 font-medium whitespace-nowrap">
                   <span className="capitalize">{data.payment}</span>
                 </th>
-                <td className="px-6 py-4">₡{Intl.NumberFormat("en-US").format(data.amount)}</td>
-                <td className="px-6 py-4 text-right">
+                <td className="px-3 py-2">
+                  {data.currency === "colones" ? "₡" : "$"} {Intl.NumberFormat("en-US").format(data.amount)}
+                </td>
+                <td className="px-3 py-2">{data.time}</td>
+                <td className="px-3 py-2 text-right">
                   <button data-modal-target="detailsModal" className=" hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-2 py-2.5 text-center mr-2 mb-2 w-24 bg-white" onClick={() => showDetailsModal(data)}>
                     Detalles
                   </button>
@@ -185,7 +191,7 @@ const DataList = ({ data, tarjeta, efectivo, getData, deleteAll }) => {
                 </svg>
                 <span className="sr-only">Close modal</span>
               </button>
-              <div className="px-6 py-6 lg:px-8">
+              <div className="px-3 py-6 lg:px-8">
                 <h3 className="mb-4 text-xl font-medium text-gray-900">Registrar nueva orden</h3>
                 <form onSubmit={handleSubmit} className="space-y-6 mb-4">
                   <div className="mb-4">
@@ -262,23 +268,23 @@ const DataList = ({ data, tarjeta, efectivo, getData, deleteAll }) => {
       <table className="w-full text-md text-left bg-slate-900 text-white absolute left-0 right-0 bottom-0">
         <tbody>
           <tr className="bg-slate-100 text-white border-t">
-            <td colSpan={2} className="px-6 py-4 text-center">
+            <td colSpan={2} className="px-3 py-2 text-center">
               <button id="open-form-modal" data-modal-target="formModal" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 border-b" type="button" onClick={deleteAll}>
                 Borrar Todo
               </button>
             </td>
           </tr>
           <tr className="bg-slate-900 text-white border-t">
-            <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
+            <th scope="row" className="px-3 py-2 font-medium whitespace-nowrap">
               <span className="capitalize">Total en Tarjeta:</span>
             </th>
-            <td className="px-6 py-4">₡{Intl.NumberFormat("en-US").format(tarjeta)}</td>
+            <td className="px-3 py-2">₡{Intl.NumberFormat("en-US").format(tarjeta)}</td>
           </tr>
           <tr className="border-t">
-            <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
+            <th scope="row" className="px-3 py-2 font-medium whitespace-nowrap">
               <span className="capitalize">Total en Efectivo:</span>
             </th>
-            <td className="px-6 py-4">₡{Intl.NumberFormat("en-US").format(efectivo)}</td>
+            <td className="px-3 py-2">₡{Intl.NumberFormat("en-US").format(efectivo)}</td>
           </tr>
         </tbody>
       </table>

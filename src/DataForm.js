@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, query, orderBy, limit } from "firebase/firestore";
 import { doc, getDocs, deleteDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 import DataList from "./DataList";
@@ -43,17 +43,30 @@ const DataForm = () => {
 
   const getData = async () => {
     const querySnapshot = await getDocs(collection(db, "caja"));
+    // const q = query(querySnapshot, orderBy("time", "desc"), limit(10));
+    // console.log("q...", q);
     const array = [];
     querySnapshot.forEach((data) => {
       // console.log(`${data.id} => ${data.data()}`);
       array.push({ id: data.id, ...data.data() });
     });
     setData(array);
-    console.log("array...", array);
     setTotalTarjeta(0);
     setTotalEfectivo(0);
     let totalT = 0;
     let totalE = 0;
+
+    array.sort((a, b) => {
+      if (a.time < b.time) {
+        return 1;
+      }
+      if (a.time > b.time) {
+        return -1;
+      }
+      return 0;
+    });
+    console.log("array...", array);
+
     array.forEach((data) => {
       if (data.payment === "tarjeta") {
         totalT = totalT + parseInt(data.amount);
