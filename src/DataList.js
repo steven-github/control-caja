@@ -32,7 +32,7 @@ const DataList = ({ data, tarjeta, efectivo, getData, deleteAll }) => {
   };
 
   const deleteData = async (index, docId) => {
-    if (window.confirm("¿Está seguro que desea borrar todos los datos?")) {
+    if (window.confirm("¿Está seguro que desea borrar este registro?")) {
       // let btn = document.getElementById("delete-" + index);
       // btn.innerText = "Borrando...";
       console.log("docId", docId);
