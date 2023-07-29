@@ -32,14 +32,16 @@ const DataList = ({ data, tarjeta, efectivo, getData, deleteAll }) => {
   };
 
   const deleteData = async (index, docId) => {
-    // let btn = document.getElementById("delete-" + index);
-    // btn.innerText = "Borrando...";
-    console.log("docId", docId);
-    setDeleting(true);
-    await deleteDoc(doc(db, "caja", docId));
-    getData();
-    // btn.innerText = "Borrar";
-    setDeleting(false);
+    if (window.confirm("¿Está seguro que desea borrar todos los datos?")) {
+      // let btn = document.getElementById("delete-" + index);
+      // btn.innerText = "Borrando...";
+      console.log("docId", docId);
+      setDeleting(true);
+      await deleteDoc(doc(db, "caja", docId));
+      getData();
+      // btn.innerText = "Borrar";
+      setDeleting(false);
+    }
   };
   const showEditsModal = (data) => {
     setDetails(data);
