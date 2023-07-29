@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
-import { getDocs } from "firebase/firestore";
+import { doc, getDocs, deleteDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 import DataList from "./DataList";
 import { Modal } from "flowbite";
@@ -65,6 +65,16 @@ const DataForm = () => {
     setTotalEfectivo(totalE);
   };
 
+  const deleteAll = async () => {
+    if (window.confirm("¿Está seguro que desea borrar todos los datos?")) {
+      const querySnapshot = await getDocs(collection(db, "caja"));
+      querySnapshot.forEach(async (data) => {
+        await deleteDoc(doc(db, "caja", data.id));
+      });
+      getData();
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -127,8 +137,8 @@ const DataForm = () => {
   return (
     <>
       <div className="flex items-center justify-center p-6">
-        <button id="open-form-modal" data-modal-target="formModal" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 border-b" type="button" onClick={showModal}>
-          Agregar Registro
+        <button id="open-form-modal" data-modal-target="formModal" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 border-b" type="button" onClick={showModal}>
+          Agregar
         </button>
       </div>
       <div id="formModal" tabIndex="-1" aria-hidden="true" className="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -222,7 +232,7 @@ const DataForm = () => {
           </div>
         </div>
       </div>
-      {data.length > 0 ? <DataList data={data} tarjeta={totalTarjeta} efectivo={totalEfectivo} getData={getData} /> : <p className="p-4 text-center">No hay datos</p>}
+      {data.length > 0 ? <DataList data={data} tarjeta={totalTarjeta} efectivo={totalEfectivo} getData={getData} deleteAll={deleteAll} /> : <p className="p-4 text-center">No hay datos</p>}
     </>
   );
 };

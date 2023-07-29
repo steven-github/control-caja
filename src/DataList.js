@@ -3,7 +3,7 @@ import { Modal } from "flowbite";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
-const DataList = ({ data, tarjeta, efectivo, getData }) => {
+const DataList = ({ data, tarjeta, efectivo, getData, deleteAll }) => {
   const [modalOptions, setModalOptions] = useState({
     backdrop: "dynamic",
     closable: true,
@@ -114,7 +114,7 @@ const DataList = ({ data, tarjeta, efectivo, getData }) => {
 
   return (
     <>
-      <div className="relative overflow-x-auto border-t" style={{ height: viewportHeight - (84 + 89 + 114) }}>
+      <div className="relative overflow-x-auto border-t" style={{ height: viewportHeight - (89 + 114) }}>
         <table className="w-full text-sm text-left text-gray-600">
           <thead className="text-sm text-black uppercase bg-gray-100">
             <tr>
@@ -149,6 +149,7 @@ const DataList = ({ data, tarjeta, efectivo, getData }) => {
             ))}
           </tbody>
         </table>
+
         <div id="detailsModal" tabIndex="-1" aria-hidden="true" className="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
           <div className="relative w-full max-w-2xl max-h-full">
             <div className="relative bg-white rounded-lg shadow">
@@ -258,6 +259,13 @@ const DataList = ({ data, tarjeta, efectivo, getData }) => {
 
       <table className="w-full text-md text-left bg-slate-900 text-white absolute left-0 right-0 bottom-0">
         <tbody>
+          <tr className="bg-slate-100 text-white border-t">
+            <td colSpan={2} className="px-6 py-4 text-center">
+              <button id="open-form-modal" data-modal-target="formModal" className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 border-b" type="button" onClick={deleteAll}>
+                Borrar Todo
+              </button>
+            </td>
+          </tr>
           <tr className="bg-slate-900 text-white border-t">
             <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
               <span className="capitalize">Total en Tarjeta:</span>
